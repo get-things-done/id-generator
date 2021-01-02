@@ -2,9 +2,9 @@
 
 namespace GetThingsDone\IdGenerator\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use GetThingsDone\IdGenerator\IdGeneratorServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {

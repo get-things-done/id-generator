@@ -2,8 +2,8 @@
 
 namespace GetThingsDone\IdGenerator;
 
-use Illuminate\Support\ServiceProvider;
 use GetThingsDone\IdGenerator\Commands\IdGeneratorCommand;
+use Illuminate\Support\ServiceProvider;
 
 class IdGeneratorServiceProvider extends ServiceProvider
 {

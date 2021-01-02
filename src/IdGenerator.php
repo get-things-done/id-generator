@@ -2,7 +2,6 @@
 
 namespace GetThingsDone\IdGenerator;
 
-use Exception;
 use Illuminate\Support\Facades\DB;
 
 class IdGenerator
@@ -25,8 +24,11 @@ class IdGenerator
 
 
     public function __construct(
-        $table, $length, $prefix, $field
-    ){
+        $table,
+        $length,
+        $prefix,
+        $field
+    ) {
         return $this->setTable($table)
                     ->setLength($length)
                     ->setPrefix($prefix)
@@ -62,6 +64,7 @@ class IdGenerator
         }
 
         $queryResult = DB::select($maxQuery);
+
         return $queryResult[0]->maxId;
     }
 
@@ -69,7 +72,7 @@ class IdGenerator
     {
         $whereString = '';
 
-        if (!empty($this->getWhere())) {
+        if (! empty($this->getWhere())) {
             $whereString .= " WHERE ";
             foreach ($this->getWhere() as $row) {
                 $whereString .= $row[0] . "=" . $row[1] . " AND ";
