@@ -47,19 +47,22 @@ class IdGenerator
         $total = DB::select($totalQuery);
 
         if ($total[0]->total) {
-            if ($this->getResetOnPrefixChange()) {
-                $maxQuery = sprintf("SELECT MAX(%s) maxId from %s WHERE %s like %s", $this->getField(), $this->getTable(), $this->getField(), "'" . $this->getPrefix() . "%'");
-            } else {
-                $maxQuery = sprintf("SELECT MAX(%s) maxId from %s", $this->getField(), $this->getTable());
-            }
-
-            $queryResult = DB::select($maxQuery);
-            $maxId = $queryResult[0]->maxId;
-            return $this->getPrefix() . str_pad($maxId + 1, $idLength, '0', STR_PAD_LEFT);
-
-        } else {
-            return $this->getPrefix() . str_pad(1, $idLength, '0', STR_PAD_LEFT);
+            $maxId = $this->getMaxId();
         }
+
+        return $this->getPrefix() . str_pad($maxId ?? '1', $idLength, '0', STR_PAD_LEFT);
+    }
+
+    protected function getMaxId()
+    {
+        if ($this->getResetOnPrefixChange()) {
+            $maxQuery = sprintf("SELECT MAX(%s) maxId from %s WHERE %s like %s", $this->getField(), $this->getTable(), $this->getField(), "'" . $this->getPrefix() . "%'");
+        } else {
+            $maxQuery = sprintf("SELECT MAX(%s) maxId from %s", $this->getField(), $this->getTable());
+        }
+
+        $queryResult = DB::select($maxQuery);
+        return $queryResult[0]->maxId;
     }
 
     protected function getWhereString(): string
