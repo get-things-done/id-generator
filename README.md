@@ -38,8 +38,7 @@ return [
 ## Usage
 
 ``` php
-$id-generator = new GetThingsDone\IdGenerator();
-echo $id-generator->echoPhrase('Hello, GetThingsDone!');
+IdGenerator::make($model->getTable(),11,'CTM'.date('ym'),'code')->generate()
 ```
 
 ## Testing
