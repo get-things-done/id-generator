@@ -35,7 +35,7 @@ class IdGenerator
                     ->setField($field);
     }
 
-    public function make($table, $length, $prefix, $field)
+    public static function make($table, $length, $prefix, $field)
     {
         return new self($table, $length, $prefix, $field);
     }
